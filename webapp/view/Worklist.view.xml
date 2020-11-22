@@ -1,90 +1,53 @@
-<mvc:View
-	controllerName="opensap.manageproducts.ManageProducts.controller.Worklist"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="opensap.manageproducts.ManageProducts.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic">
-
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 		<semantic:titleHeading>
-			<Title
-				text="{i18n>worklistTitle}"
-				level="H2"/>
+			<Title text="{i18n>worklistTitle}" level="H2"/>
 		</semantic:titleHeading>
-
 		<semantic:content>
-			<Table
-				id="table"
-				width="auto"
-				items="{
-					path: '/ProductSet',
-					sorter: {
-						path: 'ProductID',
-						descending: false
-					}
-				}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
+			<Table id="table" width="auto"
+				items="{ path: '/ProductSet', parameters: { expand:'ToSupplier'}, sorter: { path: 'ProductID', descending: false } }"
+				noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
 				updateFinished=".onUpdateFinished">
-
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title
-							id="tableHeader"
-							text="{worklistView>/worklistTableTitle}"
-							level="H3"/>
-						<ToolbarSpacer />
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search=".onSearch">
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+						<ToolbarSpacer/>
+						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
 							<layoutData>
-								<OverflowToolbarLayoutData
-									maxWidth="200px"
-									priority="NeverOverflow"/>
+								<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
 							</layoutData>
 						</SearchField>
 					</OverflowToolbar>
 				</headerToolbar>
-
 				<columns>
 					<Column id="nameColumn">
 						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+					<Column id="supplierNameColumn" demandPopin="true" minScreenWidth="Tablet">
+						<Text text="{i18n>tableSupplierColumnTitle}" id="supplierColumnTitle"/>
+					</Column>
+					<Column id="WebAddressNameColumn" demandPopin="false" minScreenWidth="Tablet">
+						<Text text="{i18n>tableSupplierWebAddressColumnTitle}" id="WebAddressColumnTitle"/>
 					</Column>
 					<Column id="unitNumberColumn" hAlign="End">
 						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 					</Column>
 				</columns>
-
 				<items>
-					<ColumnListItem
-						type="Navigation"
-						press=".onPress">
+					<ColumnListItem type="Navigation" press=".onPress">
 						<cells>
-							<ObjectIdentifier
-								title="{ProductID}"/>
-							<ObjectNumber
-								number="{
-									path: 'Price',
-									formatter: '.formatter.numberUnit'
-								}"
-								unit="{CurrencyCode}"/>
+							<ObjectIdentifier title="{ProductID}" text="{SupplierName}"/>
+							<Text text="{SupplierName}"/>
+							<Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank"/>
+							<ObjectNumber number="{ path: 'Price', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
 			</Table>
 		</semantic:content>
-
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
 		</semantic:sendEmailAction>
-
-
 	</semantic:SemanticPage>
-
 </mvc:View>
