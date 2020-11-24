@@ -4,7 +4,7 @@
 		busyIndicatorDelay="{objectView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{ProductID}" responsive="true" number="{ path: 'Price', formatter: '.formatter.numberUnit' }"
-				numberUnit="{CurrencyCode}">
+				titleActive="true" titlePress="onShowDetailPopover" numberUnit="{CurrencyCode}">
 				<attributes>
 					<ObjectAttribute text="{Name}"/>
 				</attributes>

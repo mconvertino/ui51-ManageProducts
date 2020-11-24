@@ -59,6 +59,23 @@ sap.ui.define([
 			}
 		},
 
+		onShowDetailPopover: function (oEvent) {
+			var oPopover = this._getPopover();
+			oPopover.bindElement(oEvent.getSource().getBindingContext().getPath());
+
+			var oOpener = oEvent.getParameter("domRef");
+			oPopover.openBy(oOpener);
+
+		},
+
+		_getPopover: function () {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("opensap.manageproducts.ManageProducts.view.DetailPopover", this);
+				this.getView().addDependent(this._oPopover);
+			}
+			return this._oPopover;
+		},
+
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
