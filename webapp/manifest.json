@@ -69,7 +69,13 @@
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true
+				"preload": true,
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
 			}
 		},
 		"routing": {
@@ -86,29 +92,25 @@
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "worklist",
-					"target": [
-						"worklist"
-					]
-				},
-				{
-					"pattern": "ProductSet/{objectId}",
-					"name": "object",
-					"target": [
-						"object"
-					]
-				},
-				{
-					"pattern": "AddProduct",
-					"name": "add",
-					"target": [
-						"add"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "worklist",
+				"target": [
+					"worklist"
+				]
+			}, {
+				"pattern": "ProductSet/{objectId}",
+				"name": "object",
+				"target": [
+					"object"
+				]
+			}, {
+				"pattern": "AddProduct",
+				"name": "add",
+				"target": [
+					"add"
+				]
+			}],
 			"targets": {
 				"worklist": {
 					"viewName": "Worklist",
@@ -133,7 +135,7 @@
 				"add": {
 					"viewName": "Add",
 					"viewId": "add",
-					"viewLevel":3
+					"viewLevel": 3
 				}
 			}
 		}
