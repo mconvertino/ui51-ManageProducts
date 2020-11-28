@@ -116,13 +116,13 @@
 					"viewName": "Worklist",
 					"viewId": "worklist",
 					"viewLevel": 1,
-					"title": "{i18n>worklistViewTitle}"
+					"title": "{i18n>worklistTitle}"
 				},
 				"object": {
 					"viewName": "Object",
 					"viewId": "object",
 					"viewLevel": 2,
-					"title": "{i18n>objectViewTitle}"
+					"title": "{i18n>objectTitle}"
 				},
 				"objectNotFound": {
 					"viewName": "ObjectNotFound",

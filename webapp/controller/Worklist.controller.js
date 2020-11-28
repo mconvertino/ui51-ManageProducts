@@ -41,8 +41,8 @@ sap.ui.define([
 			// Model used to manipulate control states
 			oViewModel = new JSONModel({
 				worklistTableTitle: this.getResourceBundle().getText("worklistTableTitle"),
-				saveAsTileTitle: this.getResourceBundle().getText("worklistViewTitle"),
-				shareOnJamTitle: this.getResourceBundle().getText("worklistViewTitle"),
+				saveAsTileTitle: this.getResourceBundle().getText("worklistTitle"),
+				shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
 				shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
 				shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
 				tableNoDataText: this.getResourceBundle().getText("tableNoDataText"),
