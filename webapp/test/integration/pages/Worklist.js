@@ -13,9 +13,10 @@ sap.ui.define([
 	var sViewName = "Worklist",
 		sTableId = "table",
 		sSearchFieldId = "searchField",
+		sAddButtonId = "addButton",
 		sSomethingThatCannotBeFound = "*#-Q@@||";
 
-	function createWaitForItemAtPosition (oOptions) {
+	function createWaitForItemAtPosition(oOptions) {
 		return {
 			id: sTableId,
 			matchers: function (oTable) {
@@ -41,6 +42,15 @@ sap.ui.define([
 					}));
 				},
 
+				iPressAdd: function () {
+					return this.waitFor({
+						id: sAddButtonId,
+						viewName: sViewName,
+						actions: new Press(),
+						errorMessage: "Add button not found"
+					});
+				},
+
 				iRememberTableItemAtPosition: function (iPosition) {
 					return this.waitFor(createWaitForItemAtPosition({
 						position: iPosition,
@@ -62,6 +72,17 @@ sap.ui.define([
 						id: sTableId,
 						actions: new Press(),
 						errorMessage: "The table with ID " + sTableId + " does not have a button to show more items"
+					});
+				},
+
+				iWaitUntilTheTableIsLoaded: function () {
+					return this.waitFor({
+						id: sTableId,
+						viewName: sViewName,
+						matchers: [new AggregationFilled({
+							name: "items"
+						})],
+						errorMessage: "The Table has not been loaded"
 					});
 				},
 
@@ -150,7 +171,7 @@ sap.ui.define([
 					});
 				},
 
-				theTableHasEntries : function () {
+				theTableHasEntries: function () {
 					return this.waitFor({
 						id: sTableId,
 						matchers: new AggregationFilled({
