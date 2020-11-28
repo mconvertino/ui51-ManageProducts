@@ -14,11 +14,12 @@
 
 	<link rel="stylesheet" type="text/css" href="../../resources/sap/ui/thirdparty/qunit-2.css">
 
-	<script src="../../resources/sap/ui/thirdparty/qunit-2.js"></script>
-	<script src="../../resources/sap/ui/qunit/qunit-junit.js"></script>
-	<script src="../../resources/sap/ui/qunit/qunit-coverage.js"></script>
-	<script src="../../resources/sap/ui/thirdparty/sinon.js"></script>
-	<script src="../../resources/sap/ui/thirdparty/sinon-qunit.js"></script>
+	<script>
+		jQuery.sap.require("sap.ui.qunit.qunit-css");
+		jQuery.sap.require("sap.ui.thirdparty.qunit");
+		jQuery.sap.require("sap.ui.qunit.qunit-junit");
+		jQuery.sap.require("sap.ui.qunit.qunit-coverage");
+	</script>
 
 	<script src="unitTests.qunit.js"></script>
 </head>
