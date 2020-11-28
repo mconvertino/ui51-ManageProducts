@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"../model/formatter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"sap/m/MessageToast"
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("opensap.manageproducts.ManageProducts.controller.Worklist", {
@@ -187,12 +188,23 @@ sap.ui.define([
 
 		},
 
-		_getPopover: function () {
-			if (!this._oPopover) {
-				this._oPopover = sap.ui.xmlfragment("opensap.manageproducts.ManageProducts.view.DetailPopover", this);
-				this.getView().addDependent(this._oPopover);
-			}
-			return this._oPopover;
+		/**
+		 * Event handler for the delete button. Will delete the product from the model.
+		 * @public
+		 */
+		onDeleteProduct: function (oEvent) {
+			var oColumnListItem = oEvent.getSource().getParent(),
+				sProductName = oColumnListItem.getBindingContext().getProperty("Name"),
+				sPath = oColumnListItem.getBindingContextPath();
+
+			this.getModel().remove(sPath, {
+				success: function () {
+					MessageToast.show(this.getResourceBundle().getText("worklistDeleteProductSuccess", [sProductName]));
+				}.bind(this),
+				error: function () {
+					MessageToast.show(this.getResourceBundle().getText("worklistDeleteProductError", [sProductName]));
+				}.bind(this)
+			});
 		},
 
 		/* =========================================================== */
@@ -223,6 +235,13 @@ sap.ui.define([
 			if (oTableSearchState.length !== 0) {
 				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 			}
+		},
+		_getPopover: function () {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("opensap.manageproducts.ManageProducts.view.DetailPopover", this);
+				this.getView().addDependent(this._oPopover);
+			}
+			return this._oPopover;
 		}
 
 	});

@@ -45,6 +45,9 @@
 							<Column id="unitNumberColumn" hAlign="End">
 								<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 							</Column>
+							<Column id="actionColumn" width="3.5rem" vAlign="Middle">
+								<Text text="{i18n>tableActionColumnTitle}" id="actionColumnTitle"/>
+							</Column>
 						</columns>
 						<items>
 							<ColumnListItem type="Navigation" press=".onPress">
@@ -53,6 +56,7 @@
 									<Text text="{SupplierName}"/>
 									<Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank"/>
 									<ObjectNumber number="{ path: 'Price', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+									<Button id="delete" press="onDeleteProduct" icon="sap-icon://delete"/>
 								</cells>
 							</ColumnListItem>
 						</items>
